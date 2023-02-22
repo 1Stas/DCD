@@ -1,0 +1,1172 @@
+@import 'reset';
+@font-face {
+	font-family: 'Oswald';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Oswald-Regular'), local('Oswald-Regular'),
+		url('../fonts/Oswald-Regular.woff2') format('woff2'),
+		url('../fonts/Oswald-Regular.woff') format('woff'),
+		url('../fonts/Oswald-Regular.ttf') format('ttf');
+}
+@font-face {
+	font-family: 'OpenSans';
+	font-style: normal;
+	font-weight: 400;
+	src: local('OpenSans-Regular'), local('OpenSans-Regular'),
+		url('../fonts/OpenSans-Regular.woff2') format('woff2'),
+		url('../fonts/OpenSans-Regular.woff') format('woff'),
+		url('../fonts/OpenSans-Regular.ttf') format('ttf');
+}
+
+$mainColor: #4e5dab;
+
+.body {
+	font-family: 'OpenSans';
+	font-size: 16px;
+}
+
+a {
+	text-decoration: none;
+}
+
+.btn {
+	position: relative;
+	display: inline-block;
+	font-size: 22px;
+	font-weight: 700;
+	width: 300px;
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+	text-shadow: 0 -1px 2px rgba(0, 0, 0, .2);
+	padding: .5em 1em;
+	outline: none;
+	border-radius: 10px;
+	background: $mainColor;
+	letter-spacing: 1px;
+	box-shadow:
+		0 1px rgba(255, 255, 255, .2) inset,
+		0 3px 5px rgba(0, 1, 6, .5),
+		0 0 1px 1px rgba(0, 1, 6, .2);
+	transition: .2s ease-in-out;
+}
+
+.btn:hover:not(:active) {
+	background: linear-gradient(rgb(160, 80, 130), rgb(90, 40, 130)) rgb(20, 0, 130);
+}
+
+.btn:active {
+	top: 1px;
+	background: linear-gradient(rgb(160, 80, 200), rgb(80, 40, 200)) rgb(0, 0, 200);
+	box-shadow:
+		0 0 1px rgba(0, 0, 0, .5) inset,
+		0 2px 3px rgba(0, 0, 0, .5) inset,
+		0 1px 1px rgba(255, 255, 255, .1);
+}
+
+.conteiner {
+	margin: 0 auto;
+	width: 80%;
+}
+
+// -------------------- Menu start
+
+// изменяем полоcу прокрутки
+
+::-webkit-scrollbar {
+	width: .65em;
+}
+
+::-webkit-scrollbar-track {
+	background-color: rgba(255, 255, 255);
+}
+
+::-webkit-scrollbar-thumb {
+	background: #4e5dab;
+	border-radius: 5px;
+	box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
+}
+
+// Переключаемая боковая панель навигации
+// выдвигающаяся по клику слева
+
+.nav {
+	/*  ширна произвольная */
+	width: 320px;
+	min-width: 320px;
+	/* фиксируем и выставляем высоту панели на максимум */
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	margin: 0;
+	/* сдвигаем (прячем) панель относительно левого края страницы */
+	left: -320px;
+	/* внутренние отступы */
+	padding: 15px 20px;
+	/* плавный переход смещения панели */
+	transition: left 0.3s;
+	/* определяем цвет фона панели */
+	background: #000000;
+	/* поверх других элементов */
+	z-index: 2000;
+}
+
+// Кнопка переключения панели
+// тег <label>
+
+.nav-toggle {
+	/* абсолютно позиционируем */
+	position: absolute;
+	/* вид курсора */
+	cursor: pointer;
+	/* размер шрифта */
+	font-size: 2.2em;
+	right: 0;
+	top: 16px;
+	/* анимируем цвет текста при наведении */
+	transition: color .25s ease-in-out;
+}
+
+// определяем текст кнопки
+
+.nav-toggle:after {
+	content: '\2630';
+	text-decoration: none;
+}
+
+// цвет текста при наведении
+
+.nav-toggle:hover {
+	color: #4e5dab;
+}
+
+// Скрытый чекбокс (флажок)
+// невидим и недоступен :)
+// имя селектора атрибут флажка
+
+[id='nav-toggle'] {
+	position: absolute;
+	display: none;
+}
+
+// изменение положения переключателя
+// при просмотре на мобильных устройствах
+// когда навигация раскрыта, распологаем внутри панели
+
+[id='nav-toggle']:checked~.nav>.nav-toggle {
+	left: auto;
+	right: 2px;
+	top: 1em;
+}
+
+// Когда флажок установлен, открывается панель
+// используем псевдокласс:checked
+
+[id='nav-toggle']:checked~.nav {
+	left: 0;
+	box-shadow: 4px 0px 20px 0px rgba(0, 0, 0, 0.5);
+	overflow-y: auto;
+}
+
+// смещение контента страницы
+// на размер ширины панели,
+// фишка необязательная, на любителя
+
+// [id='nav-toggle']:checked~main>article {
+// 	transform: translateX(320px);
+// }
+
+// изменение символа переключателя,
+// привычный крестик (MULTIPLICATION X),
+// вы можете испльзовать любой другой значок
+
+[id='nav-toggle']:checked~.nav-toggle:after {
+	content: '\2715';
+}
+
+// позаботьтимся о средних и маленьких экранах
+// мобильных устройств
+
+// @media screen and (min-width: 320px) {
+
+// 	html,
+// 	body {
+// 		margin: 0;
+// 		overflow-x: hidden;
+// 	}
+// }
+
+// @media screen and (max-width: 320px) {
+
+// 	html,
+// 	body {
+// 		margin: 0;
+// 		overflow-x: hidden;
+// 	}
+
+// 	.nav {
+// 		width: 100%;
+// 		box-shadow: none
+// 	}
+// }
+
+// Формируем стиль заголовка (логотип) панели
+
+.nav h2 {
+	width: 90%;
+	padding: 0;
+	margin: 10px 0;
+	text-align: center;
+	text-shadow: rgba(255, 255, 255, .1) -1px -1px 1px, rgba(0, 0, 0, .5) 1px 1px 1px;
+	font-size: 1em;
+	line-height: 1.3em;
+	opacity: 0;
+	transform: scale(0.1, 0.1);
+	transform-origin: 0% 0%;
+	transition: opacity 0.8s, transform 0.8s;
+}
+
+.nav h2 a {
+	color: #ffffff;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+// плавное появление заголовка (логотипа) при раскрытии панели
+
+[id='nav-toggle']:checked~.nav h2 {
+	opacity: 1;
+	transform: scale(1, 1);
+}
+
+// формируем непосредственно само меню
+// используем неупорядоченный список для пунктов меню
+// прикрутим трансфомации и плавные переходы
+
+.nav>ul {
+	display: block;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.nav>ul>li {
+	line-height: 2.5;
+	opacity: 0;
+	transform: translateX(-50%);
+	transition: opacity .5s .1s, transform .5s .1s;
+}
+
+[id='nav-toggle']:checked~.nav>ul>li {
+	opacity: 1;
+	transform: translateX(0);
+}
+
+// определяем интервалы появления пунктов меню
+
+.nav>ul>li:nth-child(2) {
+	transition: opacity .5s .2s, transform .5s .2s;
+}
+
+.nav>ul>li:nth-child(3) {
+	transition: opacity .5s .3s, transform .5s .3s;
+}
+
+.nav>ul>li:nth-child(4) {
+	transition: opacity .5s .4s, transform .5s .4s;
+}
+
+.nav>ul>li:nth-child(5) {
+	transition: opacity .5s .5s, transform .5s .5s;
+}
+
+.nav>ul>li:nth-child(6) {
+	transition: opacity .5s .6s, transform .5s .6s;
+}
+
+.nav>ul>li:nth-child(7) {
+	transition: opacity .5s .7s, transform .5s .7s;
+}
+
+// оформление ссылок пунктов меню
+
+.nav>ul>li>a {
+	display: inline-block;
+	position: relative;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+	font-size: 1em;
+	color: #ffffff;
+	width: 100%;
+	text-decoration: none;
+	/* плавный переход */
+	transition: color .5s ease, padding .5s ease;
+}
+
+// состояние ссылок меню при наведении
+
+.nav>ul>li>a:hover,
+.nav>ul>li>a:focus {
+	color: #4e5dab;
+	padding-left: 15px;
+}
+
+// линия подчеркивания ссылок меню
+
+.nav>ul>li>a:before {
+	content: '';
+	display: block;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	height: 1px;
+	width: 100%;
+	transition: width 0s ease;
+}
+
+.nav>ul>li>a:after {
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 1px;
+	width: 100%;
+	background: #4e5dab;
+	transition: width .5s ease;
+}
+
+// анимируем линию подчеркивания
+// ссылок при наведении
+
+.nav>ul>li>a:hover:before {
+	width: 0%;
+	background: #4e5dab;
+	transition: width .5s ease;
+}
+
+.nav>ul>li>a:hover:after {
+	width: 0%;
+	background: transparent;
+	transition: width 0s ease;
+}
+
+// фон затемнения на основной контент
+
+.mask-content {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    visibility: hidden;
+    opacity: 0;
+}
+
+[id='nav-toggle']:checked ~ .mask-content {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s, visibility .5s;
+}
+// -------------------- Menu end
+
+.sec-one {
+	.header {
+		display: flex;
+		position: relative;
+		padding: 20px 0;
+	}
+}
+
+.header-social {
+	display: flex;
+	margin-left: auto;
+	margin-right: 80px;
+	img {
+		height: 30px;
+	}
+	a {
+		margin: auto 5px;
+	}
+	.header-twitter {
+		height: 26px;
+	}
+}
+
+.sec-one-info {
+	display: flex;
+	font-size: 16px;
+	.sec-one-img {
+		width: 45%;
+	}
+	.sec-one-txt {
+		width: 45%;
+		padding: 100px 50px 50px 50px;
+		h2 {
+			font-family: "Oswald";
+			font-size: 70px;
+			font-weight: 600;
+		}
+		.txt-p {
+			color: #808080;
+		}
+		a {
+			padding-left: 10px;
+			color: $mainColor;
+			font-weight: bold;
+		}
+		.txt-span1{
+			display: block;
+			color: #808080;
+			margin: 20px 0;
+			a {
+				color: #808080;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.one-img-1200, .one-img-1000 {
+	display: none;
+}
+
+.txt-span {
+	display: block;
+	font-size: 20px;
+	font-weight: 600;
+	margin: 20px 0;
+	color: $mainColor;
+}
+
+.one-contact {
+	padding-bottom: 20px;
+	p {
+		position: relative;
+		padding: 10px 0 10px 30px;
+		img {
+			position: absolute;
+			top: 10px;
+			left: 0;
+			width: 20px;
+			height: 20px;
+		}
+	}
+}
+
+.sec-one-bside-img {
+	display: none;
+	width: 10%;
+	background-color: $mainColor;
+}
+
+.sec-one-bside {
+	width: 10%;
+	background-color: $mainColor;
+}
+
+.one-download {
+	p {
+		position: relative;
+		padding-right: 30px;
+		&:after {
+			position: absolute;
+			content: "";
+			width: 24px;
+			height: 24px;
+			background:url("../img/download.svg") no-repeat;
+			background-size: 26px;
+			top: 4px;
+			right: 30px;
+		}
+	}
+}
+
+.sec-two {
+	padding: 60px 0;
+	.conteiner {
+		width: 70%;
+	}
+}
+
+.sec-two-text {
+	text-align: center;
+	h2 {
+		font-family: 'Oswald';
+		font-size: 65px;
+	}
+	p {
+		font-family: 'OpenSans';
+		font-size: 20px;
+		width: 70%;
+		margin: 10px auto 40px auto;
+	}
+}
+
+.sec-two-task {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	div {
+		padding: 30px;
+		width: 33%;
+		h4 {
+			font-family: 'Oswald';
+			font-weight: bold;
+			font-size: 24px;
+			letter-spacing: 1px;
+			color: $mainColor;
+			margin-bottom: 10px;
+		}
+		p {
+			position: relative;
+			font-family: 'OpenSans';
+			font-size: 20px;
+			margin: 5px 5px 5px 20px;
+			&::after {
+				position: absolute;
+				content: '';
+				top: 8px;
+				left: -20px;
+				background: url('../img/cross.svg') no-repeat;
+				background-size: 100%;
+				display: block;
+				transform: rotate(0.125turn);
+				width: 16px;
+				height: 16px;
+			}
+		}
+	}
+}
+
+.sec-three {
+	text-align: center;
+	background-color: #292d33;
+	padding: 40px;
+	h3 {
+		font-family: 'Oswald';
+		font-weight: bold;
+		font-size: 64px;
+		color: #fff;
+	}
+	p {
+		font-family: 'OpenSans';
+		font-size: 18px;
+		font-style: italic;
+		width: 50%;
+		margin: 20px auto;
+		color: #858e99;
+	}
+}
+
+.sec-four {
+	display: flex;
+	flex-wrap: wrap;
+	div {
+		position: relative;
+		width: 33.333%;
+		img {
+			height: 100%;
+		}
+		span {
+			position: absolute;
+			content: '';
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			opacity: 0;
+			&:hover {
+				opacity: 1;
+				background-color: $mainColor;
+				transition: all 500ms ease;
+			}
+			p {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100%;
+				font-size: 30px;
+				color: #fff;
+			}
+		}
+	}
+	.four-freepik {
+		width: 100%;
+		text-align: center;
+		background-color: #292d33;
+		padding: 40px;
+		color: #fff;
+		a {
+			padding-left: 10px;
+			color: #fff;
+			text-decoration: underline;
+		}
+	}
+}
+
+.sec-five {
+	background-color: #292d33;
+	color: #858e99;
+	padding: 60px 0;
+	.conteiner {
+		display: flex;
+		flex-wrap: wrap;
+		div {
+			width: 33%;
+			padding: 20px;
+			h5 {
+				color: #fff;
+				font-size: 20px;
+			}
+			h2 {
+				font-family: 'Oswald';
+				font-size: 56px;
+				color: #fff;
+			}
+			.five-p {
+				display: block;
+				font-family: 'OpenSans';
+				font-size: 20px;
+				margin: 20px 0;
+			}
+			p {
+				position: relative;
+				font-family: 'OpenSans';
+				font-size: 20px;
+				padding-left: 30px;
+				&::after {
+					position: absolute;
+					content: '';
+					top: 15px;
+					left: 0;
+					width: 20px;
+					height: 0px;
+					border: 1px solid #858e99;
+				}
+			}
+			.five-resume {
+				padding: 15px;
+				font-family: 'OpenSans';
+				font-size: 20px;
+				width: 200px;
+				span {
+					position: relative;
+					padding-right: 20px;
+						&::before {
+							position: absolute;
+							content: '';
+							background: url('../img/button-resume.svg') no-repeat;
+							background-size: 70%;
+							top: 4px;
+							right: -16px;
+							width: 30px;
+							height: 30px;
+					}
+				}
+			}
+		}
+	}
+}
+
+.sec-six {
+	padding: 60px 0;
+	text-align: center;
+	h2 {
+		font-family: 'Oswald';
+		font-size: 48px;
+	}
+	h3 {
+		font-family: 'Oswald';
+		font-size: 30px;
+	}
+	p {
+		font-size: 20px;
+	}
+	img {
+		margin: 40px auto;
+		width: 250px;
+		height: 250px;
+		border-radius: 50%;
+	}
+}
+
+.six-about-me {
+	background-color: #4e5dab;
+	color: #fff;
+	width: 50%;
+	margin: 20px auto;
+	padding: 20px;
+	span {
+		display: block;
+		margin: 20px;
+		a {
+			padding-left: 10px;
+			color: #fff;
+			text-decoration: underline;
+		}
+	}
+}
+
+.six-details {
+	h4 {
+		font-weight: bold;
+		padding: 15px 10px 10px 10px;
+	}
+}
+
+.details-social {
+	display: flex;
+	justify-content: center;
+	a {
+		display: block;
+		margin: 30px 10px 10px 10px;
+		height: 30px;
+		img {
+			width: 25px;
+			height: 25px;
+			margin: 0;
+			border-radius: 0;
+		}
+	}
+}
+
+.sec-eight {
+	text-align: center;
+	background-color: #4e5dab;
+	padding: 60px 0;
+	h2 {
+		font-family: 'Oswald';
+		font-size: 64px;
+		color: #fff;
+	}
+	.eight-text {
+		font-family: 'OpenSans';
+		color: #fff;
+		font-size: 20px;
+		font-style: italic;
+		width: 70%;
+		margin: 20px auto;
+	}
+}
+
+.eight-price {
+	display: flex;
+	font-size: 16px;
+	color: #808080;
+	div {
+		background-color: #fff;
+		width: 31.6%;
+		padding: 30px 30px;
+		margin: 10px;
+		h3, h4, h5 {
+			font-family: 'Oswald';
+			color: #4e5dab;
+		}
+		h3 {
+			position: relative;
+			font-size: 48px;
+			.price-dollar {
+				font-size: 36px;
+			}
+		}
+		h4 {
+			font-size: 24px;
+		}
+		h5 {
+			margin-bottom: 30px;
+			font-size: 18px;
+		}
+		p {
+			padding: 20px 0;
+
+		}
+		span {
+			display: block;
+			border: 1px solid #808080;
+			border-top-width: 0px;
+			width: 100%;
+		}
+		.price-button {
+			border-radius: 0;
+			border: 2px solid #4e5dab;
+			margin: 30px auto 5px auto;
+			background-color: #fff;
+			width: 120px;
+			height: 40px;
+			font-size: 20px;
+			color: #4e5dab;
+			&:hover {
+				background-color: #4e5dab;
+				color: #fff;
+			}
+			&:active {
+				background-color: rgb(61, 138, 189);
+			}
+		}
+		.pb2 {
+			color: #fff;
+			background-color: #4e5dab;;
+			&:hover {
+				background-color: #fff;
+				color: #4e5dab;
+			}
+		}
+	}
+}
+
+.sec-nine {
+	position: relative;
+	background: url('../img/sdsd-min.jpg') no-repeat;
+	background-size: 100% 100%;
+	font-family: 'Oswald';
+	font-size: 44px;
+	color: #fff;
+	padding: 80px 0;
+	&::after {
+		position: absolute;
+		content: '';
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background-color: #000000a0;
+	}
+	.conteiner {
+		position: relative;
+		width: 74%;
+		z-index: 1;
+		span {
+			font-family: 'OpenSans';
+			font-size: 16px;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			a {
+				padding-left: 10px;
+				color: #fff;
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.nine-stat {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	div {
+		border: 1px solid #fff;
+		width: 20%;
+		padding: 20px;
+		margin: 20px;
+		text-align: center;
+		div {
+			border: 2px solid #fff;
+			border-radius: 50%;
+			width: 100px;
+			height: 100px;
+			margin: 30px auto;
+			padding: 14px;
+		}
+		h5 {
+			display: block;
+			margin: auto;
+			font-size: 18px;
+		}
+	}
+}
+
+.sec-ten {
+	color: $mainColor;
+	margin: 55px 0;
+	.conteiner {
+		width: 70%;
+	}
+	h6, h3 {
+		font-family: 'Oswald';
+		font-size: 36px;
+		font-weight: bold;
+
+	}
+	h6 {
+		font-size: 18px;
+	}
+}
+
+.ten-form {
+	display: flex;
+}
+
+.form-text {
+	width: 45%;
+	padding: 60px 30px;
+	a {
+		text-decoration: underline;
+		color: $mainColor;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	.ten-p {
+		margin: 20px 0;
+		font-family: 'OpenSans';
+		font-size: 20px;
+	}
+}
+
+.form-form {
+	width: 55%;
+	padding: 60px 50px;
+	background-color: #e5e5e5;
+}
+
+.form-text-social {
+	margin-top: 20px;
+	margin-bottom: 30px;
+	display: flex;
+	img {
+		width: 30px;
+		height: 30px;
+		margin: 0 15px 0 0;
+	}
+}
+
+.form {
+	font-family: 'OpenSans';
+	font-weight: 400;
+	font-size: 18px;
+ 	color: #ccc;
+ 	text-shadow: none;
+	width: 100%;
+	h2 {
+		font-family: 'Oswald';
+		font-size: 48px;
+		color: $mainColor;
+	}
+ 	input, textarea {
+ 		line-height: 2;
+		background-color: #fff;
+		padding: 10px 10px 10px 20px;
+		width: 100%;
+		margin: 10px 0;
+ 		&:focus {
+ 			outline: none;
+			&::placeholder {
+				display: none;
+			}
+ 		}
+ 	}
+ 	textarea {
+ 		width: 100%;
+ 		height: 150px;
+ 	}
+	button {
+		font-family: 'Oswald';
+		float: right;
+		font-size: 20px;
+		font-weight: bold;
+		padding: 20px 30px;
+		margin: 20px 0;
+		background-color: $mainColor;
+		color: #fff;
+		letter-spacing: 5px;
+	}
+}
+
+footer {
+	padding: 60px 10%;
+	text-align: center;
+	font-size: 14px;
+	background-color: #333;
+	color: #fff;
+	p {
+		margin-bottom: 80px;
+	}
+	a {
+		color: #A1D3FC;
+		text-decoration: underline;
+	}
+}
+
+
+@media (max-width: 1199px) { /* lg-размер (<=1199px) */
+	.conteiner {
+		width: 90%;
+	}
+	.sec-one-info .sec-one-img {
+		width: 50%;
+	}
+	.sec-one-bside {
+		width: 5%;
+	}
+	.one-img {
+		display: none;
+	}
+	.one-img-1200 {
+		display: block;
+	}
+	.sec-nine .conteiner {
+		width: 96%;
+	}
+	.sec-ten .conteiner {
+		width: 90%;
+	}
+	.sec-one-info .sec-one-txt {
+		padding: 50px;
+	}
+}
+
+
+@media (max-width: 999px) { /* md-размер (<=999px) */
+	.sec-one-info .sec-one-txt h2 {
+		font-size: 55px;
+	}
+	.one-img-1200 {
+		display: none;
+	}
+	.one-img-1000 {
+		display: block;
+	}
+}
+
+
+@media (max-width: 799px) { /* sm-размер (<=799px) */
+	.sec-one-info .sec-one-txt {
+		padding: 20px;
+	}
+
+	.sec-two-task div {
+		width: 40%;
+	}
+
+	.sec-two .conteiner {
+		width: 80%;
+	}
+
+	.sec-three p {
+		width: 90%;
+	}
+
+	.sec-four div {
+		width: 50%;
+	}
+	.six-about-me {
+		width: 90%;
+	}
+	.sec-six .conteiner {
+		width: auto;
+	}
+	.sec-eight .eight-text {
+		width: auto;
+	}
+	.nine-stat {
+		flex-wrap: wrap;
+		div {
+			width: 30%;
+		}
+	}
+	.sec-nine {
+		background: url("../img/sdsd-min-800.jpg") no-repeat;
+		background-size: 100% 100%;
+	}
+}
+
+
+@media (max-width: 599px) { /* xs-размер (<=599px) */
+	.one-img-1000 {
+		display: none;
+	}
+	.one-img {
+		display: block;
+	}
+	.sec-one-info {
+		flex-wrap: wrap;
+		.sec-one-img {
+			width: 90%;
+		}
+		.sec-one-txt {
+			padding: 50px;
+			width: 90%;
+		}
+	}
+	.sec-one-bside-img {
+		display: block;
+	}
+	.sec-one-bside {
+		width: 10%;
+	}
+	.sec-two-task div {
+		padding: 30px 0;
+	}
+	.sec-three p {
+		width: 100%;
+	}
+	.sec-four div {
+		width: 100%;
+	}
+	.sec-five .conteiner {
+		flex-wrap: wrap;
+		div {
+			width: 100%;
+			padding: 0 20px;
+		}
+	}
+	.five-resume {
+		margin-bottom: 40px;
+	}
+	.eight-price {
+		flex-wrap: wrap;
+		div {
+			width: 100%;
+		}
+	}
+	.nine-stat div {
+		width: 40%;
+	}
+	.ten-form {
+		flex-wrap: wrap;
+		.form-text {
+			width: 100%;
+		}
+		.form-form {
+			width: 100%;
+			padding: 40px 30px;
+		}
+	}
+	.form button {
+		width: 100%;
+		margin-bottom: 0;
+	}
+}
+
+@media (max-width: 320px) {	/* xxx-размер (<=320px) */
+	.sec-one-info .sec-one-txt {
+		padding: 20px;
+		.btn {
+			width: 250px;
+		}
+	}
+	.one-download p:after {
+		right: 6px;
+	}
+	.sec-two-text h2 {
+		font-size: 40px;
+	}
+	.sec-two-task div {
+		width: 90%;
+	}
+	.sec-three {
+		padding: 20px 10px;
+	}
+	.nine-stat div {
+		width: 80%;
+		margin: 10px;
+	}
+	.ten-form .form-form {
+		padding: 40px 20px;
+	}
+}

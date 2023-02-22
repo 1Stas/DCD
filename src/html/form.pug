@@ -1,0 +1,9 @@
+.form
+	form( method="get" action="url")
+		fieldset
+			h2 Contact Me
+			input(type="text" id="name" placeholder="Enter your Name" autocomplete="on" required)
+			input(type="email" id="email" placeholder="Enter a valid email adress" required autocomplete="on" pattern="[a-z]+@[a-z]+.[a-z]+")
+			textarea(name="message", spellcheck="false" placeholder="Enter your message" required)
+			button SUBMIT
+

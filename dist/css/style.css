@@ -1,0 +1,1311 @@
+@charset "UTF-8";
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+nav,
+object,
+ol,
+output,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Указываем box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0px;
+  margin: 0px;
+  border: none;
+}
+
+/* Убираем внутренние отступы */
+ul[class],
+ol[class] {
+  padding: 0;
+  list-style: none;
+  /* Удаляем стандартную стилизацию */
+}
+
+/* При наведении на ссылку меняется курсор */
+label {
+  cursor: pointer;
+}
+
+/* Выставляем основные настройки по-умолчанию для body */
+body {
+  min-height: 100vh;
+  /* полезно указать для body занять весь viewport */
+  scroll-behavior: smooth;
+  /* плавный скролл к анкорам */
+  text-rendering: optimizeSpeed;
+  /* скорость загрузки текста */
+  line-height: 1.5;
+}
+
+/* Элементы a, у которых нет класса, сбрасываем до дефолтных стилей */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  /* Для ссылок без указания класса, я выставлю text-decoration-skip-ink: auto, так что подчеркивание будет рендериться куда читабельнее. */
+}
+
+/* Упрощаем работу с изображениями */
+img {
+  /* все изображения блочными элементами */
+  max-width: 100%;
+  display: block;
+}
+
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+address {
+  font-style: normal;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button,
+input[type=submit] {
+  display: inline-block;
+  box-shadow: none;
+  background-color: transparent;
+  background: none;
+  cursor: pointer;
+}
+
+/* Указываем понятную периодичность в потоке данных у article*/
+article > * + * {
+  /* Так называемый “lobotomized owl selector” выбирает прямых потомков article и добавляет им сверху внешний отступ в 1em. Это указывает понятную периодичность в потоке контента у article. */
+  margin-top: 1em;
+}
+
+/* Наследуем шрифты для инпутов и кнопок */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  display: block;
+}
+
+a,
+a:link,
+a:visited {
+  /* color: inherit; */
+  text-decoration: none;
+  /* display: inline-block; */
+}
+
+a:hover {
+  /* color: inherit; */
+  text-decoration: none;
+}
+
+aside,
+nav,
+footer,
+header,
+section,
+main {
+  display: block;
+}
+
+/* Удаляем все анимации и переходы для людей, которые предпочитай их не использовать */
+@font-face {
+  font-family: "Oswald";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Oswald-Regular"), local("Oswald-Regular"), url("../fonts/Oswald-Regular.woff2") format("woff2"), url("../fonts/Oswald-Regular.woff") format("woff"), url("../fonts/Oswald-Regular.ttf") format("ttf");
+}
+@font-face {
+  font-family: "OpenSans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("OpenSans-Regular"), local("OpenSans-Regular"), url("../fonts/OpenSans-Regular.woff2") format("woff2"), url("../fonts/OpenSans-Regular.woff") format("woff"), url("../fonts/OpenSans-Regular.ttf") format("ttf");
+}
+.body {
+  font-family: "OpenSans";
+  font-size: 16px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 700;
+  width: 300px;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  text-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+  padding: 0.5em 1em;
+  outline: none;
+  border-radius: 10px;
+  background: #4e5dab;
+  letter-spacing: 1px;
+  box-shadow: 0 1px rgba(255, 255, 255, 0.2) inset, 0 3px 5px rgba(0, 1, 6, 0.5), 0 0 1px 1px rgba(0, 1, 6, 0.2);
+  transition: 0.2s ease-in-out;
+}
+
+.btn:hover:not(:active) {
+  background: linear-gradient(rgb(160, 80, 130), rgb(90, 40, 130)) rgb(20, 0, 130);
+}
+
+.btn:active {
+  top: 1px;
+  background: linear-gradient(rgb(160, 80, 200), rgb(80, 40, 200)) rgb(0, 0, 200);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5) inset, 0 2px 3px rgba(0, 0, 0, 0.5) inset, 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.conteiner {
+  margin: 0 auto;
+  width: 80%;
+}
+
+::-webkit-scrollbar {
+  width: 0.65em;
+}
+
+::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4e5dab;
+  border-radius: 5px;
+  box-shadow: inset 0.05em 0.05em 0 rgba(0, 0, 0, 0.1), inset 0 -0.05em 0 rgba(0, 0, 0, 0.07);
+}
+
+.nav {
+  /*  ширна произвольная */
+  width: 320px;
+  min-width: 320px;
+  /* фиксируем и выставляем высоту панели на максимум */
+  height: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  /* сдвигаем (прячем) панель относительно левого края страницы */
+  left: -320px;
+  /* внутренние отступы */
+  padding: 15px 20px;
+  /* плавный переход смещения панели */
+  transition: left 0.3s;
+  /* определяем цвет фона панели */
+  background: #000000;
+  /* поверх других элементов */
+  z-index: 2000;
+}
+
+.nav-toggle {
+  /* абсолютно позиционируем */
+  position: absolute;
+  /* вид курсора */
+  cursor: pointer;
+  /* размер шрифта */
+  font-size: 2.2em;
+  right: 0;
+  top: 16px;
+  /* анимируем цвет текста при наведении */
+  transition: color 0.25s ease-in-out;
+}
+
+.nav-toggle:after {
+  content: "☰";
+  text-decoration: none;
+}
+
+.nav-toggle:hover {
+  color: #4e5dab;
+}
+
+[id=nav-toggle] {
+  position: absolute;
+  display: none;
+}
+
+[id=nav-toggle]:checked ~ .nav > .nav-toggle {
+  left: auto;
+  right: 2px;
+  top: 1em;
+}
+
+[id=nav-toggle]:checked ~ .nav {
+  left: 0;
+  box-shadow: 4px 0px 20px 0px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+}
+
+[id=nav-toggle]:checked ~ .nav-toggle:after {
+  content: "✕";
+}
+
+.nav h2 {
+  width: 90%;
+  padding: 0;
+  margin: 10px 0;
+  text-align: center;
+  text-shadow: rgba(255, 255, 255, 0.1) -1px -1px 1px, rgba(0, 0, 0, 0.5) 1px 1px 1px;
+  font-size: 1em;
+  line-height: 1.3em;
+  opacity: 0;
+  transform: scale(0.1, 0.1);
+  transform-origin: 0% 0%;
+  transition: opacity 0.8s, transform 0.8s;
+}
+
+.nav h2 a {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+[id=nav-toggle]:checked ~ .nav h2 {
+  opacity: 1;
+  transform: scale(1, 1);
+}
+
+.nav > ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav > ul > li {
+  line-height: 2.5;
+  opacity: 0;
+  transform: translateX(-50%);
+  transition: opacity 0.5s 0.1s, transform 0.5s 0.1s;
+}
+
+[id=nav-toggle]:checked ~ .nav > ul > li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav > ul > li:nth-child(2) {
+  transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+
+.nav > ul > li:nth-child(3) {
+  transition: opacity 0.5s 0.3s, transform 0.5s 0.3s;
+}
+
+.nav > ul > li:nth-child(4) {
+  transition: opacity 0.5s 0.4s, transform 0.5s 0.4s;
+}
+
+.nav > ul > li:nth-child(5) {
+  transition: opacity 0.5s 0.5s, transform 0.5s 0.5s;
+}
+
+.nav > ul > li:nth-child(6) {
+  transition: opacity 0.5s 0.6s, transform 0.5s 0.6s;
+}
+
+.nav > ul > li:nth-child(7) {
+  transition: opacity 0.5s 0.7s, transform 0.5s 0.7s;
+}
+
+.nav > ul > li > a {
+  display: inline-block;
+  position: relative;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1em;
+  color: #ffffff;
+  width: 100%;
+  text-decoration: none;
+  /* плавный переход */
+  transition: color 0.5s ease, padding 0.5s ease;
+}
+
+.nav > ul > li > a:hover,
+.nav > ul > li > a:focus {
+  color: #4e5dab;
+  padding-left: 15px;
+}
+
+.nav > ul > li > a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  transition: width 0s ease;
+}
+
+.nav > ul > li > a:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: #4e5dab;
+  transition: width 0.5s ease;
+}
+
+.nav > ul > li > a:hover:before {
+  width: 0%;
+  background: #4e5dab;
+  transition: width 0.5s ease;
+}
+
+.nav > ul > li > a:hover:after {
+  width: 0%;
+  background: transparent;
+  transition: width 0s ease;
+}
+
+.mask-content {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+}
+
+[id=nav-toggle]:checked ~ .mask-content {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s, visibility 0.5s;
+}
+
+.sec-one .header {
+  display: flex;
+  position: relative;
+  padding: 20px 0;
+}
+
+.header-social {
+  display: flex;
+  margin-left: auto;
+  margin-right: 80px;
+}
+.header-social img {
+  height: 30px;
+}
+.header-social a {
+  margin: auto 5px;
+}
+.header-social .header-twitter {
+  height: 26px;
+}
+
+.sec-one-info {
+  display: flex;
+  font-size: 16px;
+}
+.sec-one-info .sec-one-img {
+  width: 45%;
+}
+.sec-one-info .sec-one-txt {
+  width: 45%;
+  padding: 100px 50px 50px 50px;
+}
+.sec-one-info .sec-one-txt h2 {
+  font-family: "Oswald";
+  font-size: 70px;
+  font-weight: 600;
+}
+.sec-one-info .sec-one-txt .txt-p {
+  color: #808080;
+}
+.sec-one-info .sec-one-txt a {
+  padding-left: 10px;
+  color: #4e5dab;
+  font-weight: bold;
+}
+.sec-one-info .sec-one-txt .txt-span1 {
+  display: block;
+  color: #808080;
+  margin: 20px 0;
+}
+.sec-one-info .sec-one-txt .txt-span1 a {
+  color: #808080;
+  text-decoration: underline;
+}
+
+.one-img-1200, .one-img-1000 {
+  display: none;
+}
+
+.txt-span {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px 0;
+  color: #4e5dab;
+}
+
+.one-contact {
+  padding-bottom: 20px;
+}
+.one-contact p {
+  position: relative;
+  padding: 10px 0 10px 30px;
+}
+.one-contact p img {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.sec-one-bside-img {
+  display: none;
+  width: 10%;
+  background-color: #4e5dab;
+}
+
+.sec-one-bside {
+  width: 10%;
+  background-color: #4e5dab;
+}
+
+.one-download p {
+  position: relative;
+  padding-right: 30px;
+}
+.one-download p:after {
+  position: absolute;
+  content: "";
+  width: 24px;
+  height: 24px;
+  background: url("../img/download.svg") no-repeat;
+  background-size: 26px;
+  top: 4px;
+  right: 30px;
+}
+
+.sec-two {
+  padding: 60px 0;
+}
+.sec-two .conteiner {
+  width: 70%;
+}
+
+.sec-two-text {
+  text-align: center;
+}
+.sec-two-text h2 {
+  font-family: "Oswald";
+  font-size: 65px;
+}
+.sec-two-text p {
+  font-family: "OpenSans";
+  font-size: 20px;
+  width: 70%;
+  margin: 10px auto 40px auto;
+}
+
+.sec-two-task {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.sec-two-task div {
+  padding: 30px;
+  width: 33%;
+}
+.sec-two-task div h4 {
+  font-family: "Oswald";
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 1px;
+  color: #4e5dab;
+  margin-bottom: 10px;
+}
+.sec-two-task div p {
+  position: relative;
+  font-family: "OpenSans";
+  font-size: 20px;
+  margin: 5px 5px 5px 20px;
+}
+.sec-two-task div p::after {
+  position: absolute;
+  content: "";
+  top: 8px;
+  left: -20px;
+  background: url("../img/cross.svg") no-repeat;
+  background-size: 100%;
+  display: block;
+  transform: rotate(0.125turn);
+  width: 16px;
+  height: 16px;
+}
+
+.sec-three {
+  text-align: center;
+  background-color: #292d33;
+  padding: 40px;
+}
+.sec-three h3 {
+  font-family: "Oswald";
+  font-weight: bold;
+  font-size: 64px;
+  color: #fff;
+}
+.sec-three p {
+  font-family: "OpenSans";
+  font-size: 18px;
+  font-style: italic;
+  width: 50%;
+  margin: 20px auto;
+  color: #858e99;
+}
+
+.sec-four {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sec-four div {
+  position: relative;
+  width: 33.333%;
+}
+.sec-four div img {
+  height: 100%;
+}
+.sec-four div span {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+.sec-four div span:hover {
+  opacity: 1;
+  background-color: #4e5dab;
+  transition: all 500ms ease;
+}
+.sec-four div span p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 30px;
+  color: #fff;
+}
+.sec-four .four-freepik {
+  width: 100%;
+  text-align: center;
+  background-color: #292d33;
+  padding: 40px;
+  color: #fff;
+}
+.sec-four .four-freepik a {
+  padding-left: 10px;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.sec-five {
+  background-color: #292d33;
+  color: #858e99;
+  padding: 60px 0;
+}
+.sec-five .conteiner {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sec-five .conteiner div {
+  width: 33%;
+  padding: 20px;
+}
+.sec-five .conteiner div h5 {
+  color: #fff;
+  font-size: 20px;
+}
+.sec-five .conteiner div h2 {
+  font-family: "Oswald";
+  font-size: 56px;
+  color: #fff;
+}
+.sec-five .conteiner div .five-p {
+  display: block;
+  font-family: "OpenSans";
+  font-size: 20px;
+  margin: 20px 0;
+}
+.sec-five .conteiner div p {
+  position: relative;
+  font-family: "OpenSans";
+  font-size: 20px;
+  padding-left: 30px;
+}
+.sec-five .conteiner div p::after {
+  position: absolute;
+  content: "";
+  top: 15px;
+  left: 0;
+  width: 20px;
+  height: 0px;
+  border: 1px solid #858e99;
+}
+.sec-five .conteiner div .five-resume {
+  padding: 15px;
+  font-family: "OpenSans";
+  font-size: 20px;
+  width: 200px;
+}
+.sec-five .conteiner div .five-resume span {
+  position: relative;
+  padding-right: 20px;
+}
+.sec-five .conteiner div .five-resume span::before {
+  position: absolute;
+  content: "";
+  background: url("../img/button-resume.svg") no-repeat;
+  background-size: 70%;
+  top: 4px;
+  right: -16px;
+  width: 30px;
+  height: 30px;
+}
+
+.sec-six {
+  padding: 60px 0;
+  text-align: center;
+}
+.sec-six h2 {
+  font-family: "Oswald";
+  font-size: 48px;
+}
+.sec-six h3 {
+  font-family: "Oswald";
+  font-size: 30px;
+}
+.sec-six p {
+  font-size: 20px;
+}
+.sec-six img {
+  margin: 40px auto;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+}
+
+.six-about-me {
+  background-color: #4e5dab;
+  color: #fff;
+  width: 50%;
+  margin: 20px auto;
+  padding: 20px;
+}
+.six-about-me span {
+  display: block;
+  margin: 20px;
+}
+.six-about-me span a {
+  padding-left: 10px;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.six-details h4 {
+  font-weight: bold;
+  padding: 15px 10px 10px 10px;
+}
+
+.details-social {
+  display: flex;
+  justify-content: center;
+}
+.details-social a {
+  display: block;
+  margin: 30px 10px 10px 10px;
+  height: 30px;
+}
+.details-social a img {
+  width: 25px;
+  height: 25px;
+  margin: 0;
+  border-radius: 0;
+}
+
+.sec-eight {
+  text-align: center;
+  background-color: #4e5dab;
+  padding: 60px 0;
+}
+.sec-eight h2 {
+  font-family: "Oswald";
+  font-size: 64px;
+  color: #fff;
+}
+.sec-eight .eight-text {
+  font-family: "OpenSans";
+  color: #fff;
+  font-size: 20px;
+  font-style: italic;
+  width: 70%;
+  margin: 20px auto;
+}
+
+.eight-price {
+  display: flex;
+  font-size: 16px;
+  color: #808080;
+}
+.eight-price div {
+  background-color: #fff;
+  width: 31.6%;
+  padding: 30px 30px;
+  margin: 10px;
+}
+.eight-price div h3, .eight-price div h4, .eight-price div h5 {
+  font-family: "Oswald";
+  color: #4e5dab;
+}
+.eight-price div h3 {
+  position: relative;
+  font-size: 48px;
+}
+.eight-price div h3 .price-dollar {
+  font-size: 36px;
+}
+.eight-price div h4 {
+  font-size: 24px;
+}
+.eight-price div h5 {
+  margin-bottom: 30px;
+  font-size: 18px;
+}
+.eight-price div p {
+  padding: 20px 0;
+}
+.eight-price div span {
+  display: block;
+  border: 1px solid #808080;
+  border-top-width: 0px;
+  width: 100%;
+}
+.eight-price div .price-button {
+  border-radius: 0;
+  border: 2px solid #4e5dab;
+  margin: 30px auto 5px auto;
+  background-color: #fff;
+  width: 120px;
+  height: 40px;
+  font-size: 20px;
+  color: #4e5dab;
+}
+.eight-price div .price-button:hover {
+  background-color: #4e5dab;
+  color: #fff;
+}
+.eight-price div .price-button:active {
+  background-color: rgb(61, 138, 189);
+}
+.eight-price div .pb2 {
+  color: #fff;
+  background-color: #4e5dab;
+}
+.eight-price div .pb2:hover {
+  background-color: #fff;
+  color: #4e5dab;
+}
+
+.sec-nine {
+  position: relative;
+  background: url("../img/sdsd-min.jpg") no-repeat;
+  background-size: 100% 100%;
+  font-family: "Oswald";
+  font-size: 44px;
+  color: #fff;
+  padding: 80px 0;
+}
+.sec-nine::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6274509804);
+}
+.sec-nine .conteiner {
+  position: relative;
+  width: 74%;
+  z-index: 1;
+}
+.sec-nine .conteiner span {
+  font-family: "OpenSans";
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+}
+.sec-nine .conteiner span a {
+  padding-left: 10px;
+  color: #fff;
+  text-decoration: underline;
+}
+
+.nine-stat {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.nine-stat div {
+  border: 1px solid #fff;
+  width: 20%;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+}
+.nine-stat div div {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin: 30px auto;
+  padding: 14px;
+}
+.nine-stat div h5 {
+  display: block;
+  margin: auto;
+  font-size: 18px;
+}
+
+.sec-ten {
+  color: #4e5dab;
+  margin: 55px 0;
+}
+.sec-ten .conteiner {
+  width: 70%;
+}
+.sec-ten h6, .sec-ten h3 {
+  font-family: "Oswald";
+  font-size: 36px;
+  font-weight: bold;
+}
+.sec-ten h6 {
+  font-size: 18px;
+}
+
+.ten-form {
+  display: flex;
+}
+
+.form-text {
+  width: 45%;
+  padding: 60px 30px;
+}
+.form-text a {
+  text-decoration: underline;
+  color: #4e5dab;
+  font-weight: bold;
+  font-size: 20px;
+}
+.form-text .ten-p {
+  margin: 20px 0;
+  font-family: "OpenSans";
+  font-size: 20px;
+}
+
+.form-form {
+  width: 55%;
+  padding: 60px 50px;
+  background-color: #e5e5e5;
+}
+
+.form-text-social {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  display: flex;
+}
+.form-text-social img {
+  width: 30px;
+  height: 30px;
+  margin: 0 15px 0 0;
+}
+
+.form {
+  font-family: "OpenSans";
+  font-weight: 400;
+  font-size: 18px;
+  color: #ccc;
+  text-shadow: none;
+  width: 100%;
+}
+.form h2 {
+  font-family: "Oswald";
+  font-size: 48px;
+  color: #4e5dab;
+}
+.form input, .form textarea {
+  line-height: 2;
+  background-color: #fff;
+  padding: 10px 10px 10px 20px;
+  width: 100%;
+  margin: 10px 0;
+}
+.form input:focus, .form textarea:focus {
+  outline: none;
+}
+.form input:focus::placeholder, .form textarea:focus::placeholder {
+  display: none;
+}
+.form textarea {
+  width: 100%;
+  height: 150px;
+}
+.form button {
+  font-family: "Oswald";
+  float: right;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 30px;
+  margin: 20px 0;
+  background-color: #4e5dab;
+  color: #fff;
+  letter-spacing: 5px;
+}
+
+footer {
+  padding: 60px 10%;
+  text-align: center;
+  font-size: 14px;
+  background-color: #333;
+  color: #fff;
+}
+footer p {
+  margin-bottom: 80px;
+}
+footer a {
+  color: #A1D3FC;
+  text-decoration: underline;
+}
+
+@media (max-width: 1199px) { /* lg-размер (<=1199px) */
+  .conteiner {
+    width: 90%;
+  }
+  .sec-one-info .sec-one-img {
+    width: 50%;
+  }
+  .sec-one-bside {
+    width: 5%;
+  }
+  .one-img {
+    display: none;
+  }
+  .one-img-1200 {
+    display: block;
+  }
+  .sec-nine .conteiner {
+    width: 96%;
+  }
+  .sec-ten .conteiner {
+    width: 90%;
+  }
+  .sec-one-info .sec-one-txt {
+    padding: 50px;
+  }
+}
+@media (max-width: 999px) { /* md-размер (<=999px) */
+  .sec-one-info .sec-one-txt h2 {
+    font-size: 55px;
+  }
+  .one-img-1200 {
+    display: none;
+  }
+  .one-img-1000 {
+    display: block;
+  }
+}
+@media (max-width: 799px) { /* sm-размер (<=799px) */
+  .sec-one-info .sec-one-txt {
+    padding: 20px;
+  }
+  .sec-two-task div {
+    width: 40%;
+  }
+  .sec-two .conteiner {
+    width: 80%;
+  }
+  .sec-three p {
+    width: 90%;
+  }
+  .sec-four div {
+    width: 50%;
+  }
+  .six-about-me {
+    width: 90%;
+  }
+  .sec-six .conteiner {
+    width: auto;
+  }
+  .sec-eight .eight-text {
+    width: auto;
+  }
+  .nine-stat {
+    flex-wrap: wrap;
+  }
+  .nine-stat div {
+    width: 30%;
+  }
+  .sec-nine {
+    background: url("../img/sdsd-min-800.jpg") no-repeat;
+    background-size: 100% 100%;
+  }
+}
+@media (max-width: 599px) { /* xs-размер (<=599px) */
+  .one-img-1000 {
+    display: none;
+  }
+  .one-img {
+    display: block;
+  }
+  .sec-one-info {
+    flex-wrap: wrap;
+  }
+  .sec-one-info .sec-one-img {
+    width: 90%;
+  }
+  .sec-one-info .sec-one-txt {
+    padding: 50px;
+    width: 90%;
+  }
+  .sec-one-bside-img {
+    display: block;
+  }
+  .sec-one-bside {
+    width: 10%;
+  }
+  .sec-two-task div {
+    padding: 30px 0;
+  }
+  .sec-three p {
+    width: 100%;
+  }
+  .sec-four div {
+    width: 100%;
+  }
+  .sec-five .conteiner {
+    flex-wrap: wrap;
+  }
+  .sec-five .conteiner div {
+    width: 100%;
+    padding: 0 20px;
+  }
+  .five-resume {
+    margin-bottom: 40px;
+  }
+  .eight-price {
+    flex-wrap: wrap;
+  }
+  .eight-price div {
+    width: 100%;
+  }
+  .nine-stat div {
+    width: 40%;
+  }
+  .ten-form {
+    flex-wrap: wrap;
+  }
+  .ten-form .form-text {
+    width: 100%;
+  }
+  .ten-form .form-form {
+    width: 100%;
+    padding: 40px 30px;
+  }
+  .form button {
+    width: 100%;
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 320px) { /* xxx-размер (<=320px) */
+  .sec-one-info .sec-one-txt {
+    padding: 20px;
+  }
+  .sec-one-info .sec-one-txt .btn {
+    width: 250px;
+  }
+  .one-download p:after {
+    right: 6px;
+  }
+  .sec-two-text h2 {
+    font-size: 40px;
+  }
+  .sec-two-task div {
+    width: 90%;
+  }
+  .sec-three {
+    padding: 20px 10px;
+  }
+  .nine-stat div {
+    width: 80%;
+    margin: 10px;
+  }
+  .ten-form .form-form {
+    padding: 40px 20px;
+  }
+}
